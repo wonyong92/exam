@@ -5,9 +5,12 @@ import java.io.IOException;
 import java.util.List;
 
 public interface DepartmentParser {
-     String getFileType();
-     List parsing (File file) throws IOException;
-     default boolean matchFileType(String fileName){
-          return fileName.trim().toLowerCase().endsWith(getFileType().toLowerCase());
-     }
+
+  String getFileType();
+
+  List<String> parsing(File file) throws IOException;
+
+  default boolean matchFileType(String fileName) {
+    return fileName.trim().toLowerCase().endsWith(getFileType().toLowerCase());
+  }
 }

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -21,7 +22,7 @@ import java.util.stream.Stream;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class DepartmentParserServiceTest {
+class DepartmentSaveDtoParserServiceTest {
 
     static DepartmentParserResolver departmentParserResolver;
     static TextDepartmentParser textDepartmentParser = new TextDepartmentParser();

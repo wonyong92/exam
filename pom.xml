@@ -91,6 +91,25 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.13.0</version>
+        </dependency>
+
     </dependencies>
 
 
@@ -144,6 +163,14 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>com/nhnacademy/exam/entity/QDepartmentAndMembers.class</exclude>
+                                <exclude>com/nhnacademy/exam/entity/QDepartmentAndMembersId.class</exclude>
+                                <exclude>com/nhnacademy/exam/entity/member/entity/QDepartmentMember.class</exclude>
+                                <exclude>com/nhnacademy/exam/entity/department/entity/QDepartment.class</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                     <execution>
                         <id>jacoco-site</id>
@@ -151,6 +178,14 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>com/nhnacademy/exam/entity/QDepartmentAndMembers.class</exclude>
+                                <exclude>com/nhnacademy/exam/entity/QDepartmentAndMembersId.class</exclude>
+                                <exclude>com/nhnacademy/exam/entity/member/entity/QDepartmentMember.class</exclude>
+                                <exclude>com/nhnacademy/exam/entity/department/entity/QDepartment.class</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
