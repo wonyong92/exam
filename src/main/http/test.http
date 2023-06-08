@@ -1,9 +1,139 @@
-### department 등록
+
+###
+GET http://localhost:8080/department-members?departmentIds=L1001,L1002
+Accept:application/json
+X-USER-ID:nhnacademy
+
+<> 2023-06-08T173242.200.json
+<> 2023-06-08T172647.200.json
+
+###
+#1. L1001 부서조회 요청:
+GET http://localhost:8080/department-members?departmentIds=L1001
+Accept:application/json
+X-USER-ID:nhnacademy
+
+<> 2023-06-08T173245.200.json
+
+###
+#2. Missing Parameter 예외 요청:
+GET http://localhost:8080/department-members
+Accept:application/json
+X-USER-ID:nhnacademy
+
+<> 2023-06-08T173247.400.json
+<> 2023-06-08T172649.400.json
+
+###
+#3. Empty Parameter 예외 요청:
+GET http://localhost:8080/department-members?s=
+Accept:application/json
+X-USER-ID:nhnacademy
+
+<> 2023-06-08T172655.400.json
+
+
+###
+#4. application/csv 예외 요청:
+GET http://localhost:8080/department-members?departmentIds=L1001
+Accept:application/csv
+X-USER-ID:nhnacademy
+
+<> 2023-06-08T172659.400.json
+
+
+###
+#5. Unauthorized X-USER-ID:marco 예외 요청:
+GET http://localhost:8080/department-members?departmentIds=L1001
+Accept:application/json
+X-USER-ID:marco
+
+<> 2023-06-08T172705.401.json
+
+
+###
+#6. Unauthorized X-USER-ID: Empty 예외 요청:
+GET http://localhost:8080/department-members?departmentIds=L1001
+Accept:application/json
+X-USER-ID:
+
+<> 2023-06-08T172711.401.json
+
+
+###
+#7. Unauthorized X-USER-ID: NULL 예외 요청:
+GET http://localhost:8080/department-members?departmentIds=L1001
+Accept:application/json
+
+<> 2023-06-08T172713.401.json
+
+###
+// 1. 부서 등록 요청:
 POST http://localhost:8080/departments
 Content-Type: application/json
 X-USER-ID:nhnacademy
 
 {
-  "id":"CS0001",
-  "name":"고객서비스1팀"
+  "id" : "CS0001",
+  "name" : "고객서비스1팀"
 }
+
+<> 2023-06-08T172716.201.json
+
+
+
+###
+
+// 2. 부서 조회 요청:
+GET http://localhost:8080/departments/CS0001
+X-USER-ID:nhnacademy
+
+<> 2023-06-08T172732.400.json
+<> 2023-06-08T172725.200.json
+<> 2023-06-08T172719.200.json
+
+###
+
+// 3. 부서 수정 요청:
+PUT http://localhost:8080/departments/CS0001
+Content-Type: application/json
+X-USER-ID:nhnacademy
+
+{
+  "name" : "CS1팀"
+}
+
+###
+
+// 4. 부서 삭제 요청:
+DELETE http://localhost:8080/departments/CS0001
+X-USER-ID:nhnacademy
+
+###
+
+// 5. 부서 아이디 중복체크 예외 요청:
+POST http://localhost:8080/departments
+Content-Type: application/json
+X-USER-ID:nhnacademy
+
+{
+  "id" : "L1001",
+  "name" : "고객서비스1팀"
+}
+
+<> 2023-06-08T172735.400.json
+
+###
+
+// 6. 부서를 찾을 수 없는 예외 요청:
+GET http://localhost:8080/departments/CS0002
+X-USER-ID:nhnacademy
+
+<> 2023-06-08T172741.400.json
+
+###
+
+GET http://localhost:8080/departments/L1001
+Accept:application/xml
+X-USER-ID:nhnacademy
+

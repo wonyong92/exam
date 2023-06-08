@@ -24,7 +24,7 @@ import org.springframework.core.io.ResourceLoader;
 @SpringBootApplication
 @ConfigurationPropertiesScan
 @RequiredArgsConstructor
-public class ExamApplication implements CommandLineRunner {
+public class ExamApplication {
 
   private final DepartmentParserResolver resolver;
   private final ResourceLoader resourceLoader;
@@ -37,44 +37,5 @@ public class ExamApplication implements CommandLineRunner {
     SpringApplication.run(ExamApplication.class, args);
   }
 
-  @Override
-  public void run(String... args) {
 
-    String srcName = "classpath:data";
-    int count = 0;
-
-    try {
-      for (String fileName : Objects.requireNonNull(resourceLoader.getResource(srcName).getFile().list())) {
-        DepartmentParser parser = resolver.getDepartmentParser(fileName);
-        List<String> parseResult = parser.parsing(resourceLoader.getResource(srcName + "/" + fileName).getFile());
-        for (String data : parseResult) {
-          String[] splited = data.split(",");
-          if (splited.length < 4) {
-            continue;
-          }
-          String memberId = splited[0];
-          String memberName = splited[1];
-          String departMentName = splited[2];
-          String departMentId = splited[3];
-          Department department = null;
-          if (!departmentRepository.existsById(departMentId)) {
-            department = departmentRepository.save(new Department(departMentId, departMentName));
-          } else {
-            department = departmentRepository.findById(departMentId).orElse(null);
-          }
-
-          DepartmentMember member = memberRepository.save(new DepartmentMember(Long.valueOf(memberId), memberName));
-
-          departmentAndMembersRepository.save(new DepartmentAndMembers(new DepartmentAndMembersId(departMentId, Long.valueOf(memberId)), department, member));
-
-          count++;
-        }
-      }
-
-    } catch (IOException e) {
-      log.info("파일 읽기 오류: " + e.getMessage());
-    }
-    log.info("읽기 결과 : " + count);
-
-  }
 }
